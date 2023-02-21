@@ -11,3 +11,6 @@ class Solution:
                     break
         
         return dp[0]
+
+# note
+# We build a boolean array where the ith element is true if the substring up to the ith character can be segmented into words from the dictionary.
