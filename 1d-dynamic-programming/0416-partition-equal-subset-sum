@@ -1,7 +1,7 @@
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
 
-        #reccursion with memoization
+        #recursion with memoization
 
         if sum(nums) % 2 == 1: return False
         dp = {}
