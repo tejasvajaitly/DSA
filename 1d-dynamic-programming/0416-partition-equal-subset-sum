@@ -1,0 +1,36 @@
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+
+        #reccursion with memoization
+
+        if sum(nums) % 2 == 1: return False
+        dp = {}
+
+        def dfs(i, target):
+            if target == 0: return True
+            if target < 0 or i == len(nums): return False
+            if (i, target) in dp: return dp[(i, target)]
+            if dfs(i+1, target) or dfs(i+1, target - nums[i]):
+                dp[(i, target)] = True
+                return True
+            dp[(i, target)] = False
+            return False
+        
+        return dfs(0, sum(nums)//2)
+
+
+        #true dp solution
+
+        if sum(nums) % 2 == 1: return False
+        target = sum(nums)//2
+        dp = set()
+        for i in range(len(nums) - 1, -1, -1):
+            nextDp = set()
+            for j in dp:
+                if j + nums[i] == target: return True
+                nextDp.add(j+nums[i])
+                nextDp.add(j)
+            nextDp.add(nums[i])
+            dp = nextDp
+
+        return False
